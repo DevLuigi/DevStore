@@ -3,8 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
 
-//oiiiii
-
 import { Container, Conteudo } from './styled.js'
 
 import { confirmAlert } from 'react-confirm-alert'; 
@@ -105,7 +103,7 @@ export default function Index() {
                     if(r.erro)
                         toast.error(r.erro);
                     else
-                        toast.success("🚀 Aluno Removido!!") 
+                        toast.success(`🚀 Produto ${id} Removido!!`) 
                     
                     listar();
 
