@@ -1,17 +1,20 @@
-import React from 'react'
+import { React, useRef, useState } from 'react'
 
 import { Container, ChatButton, ChatInput } from './styled.js';
 
 export default function Login(){
+
+    const [usuario, setUsuario] = useState('');
+    const [senha, setSenha] = useState('');
+
+
     return(
         <Container>
-            <ToastContainer />
-            <LoadingBar color="red" ref={loading} />
             <div className="box">
                 <div className="titulo">
                     <img src="/assets/images/logo-monkchat.png" alt="" />
                     <br />
-                    MonkChat
+                    DevStore
                 </div>
             </div>
 
@@ -41,7 +44,7 @@ export default function Login(){
                         </div>
                         <div>
                             <ChatButton
-                                onClick={logar}
+                                onClick={""}
                                 style={{ fontSize: '1.2em'}}> Login </ChatButton>
                         </div>
                     </div>

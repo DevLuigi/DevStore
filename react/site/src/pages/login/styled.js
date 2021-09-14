@@ -13,11 +13,13 @@ const Container = styled.div`
         text-align: center;
         width: 60vw;
         padding: 2em 5em 6em 5em;
-        background-color: #583BBF;
+        background-color: #119FDC;
         color: #fff;
     }
     .titulo {
-        font: 700 2.2em Montserrat;
+        font-family: sans-serif;
+        font-size: 2.2em;
+        font-weight: 700;
     }
     .login {
         display: flex;
@@ -38,7 +40,7 @@ const Container = styled.div`
         flex-direction: column;
     }
     .title {
-        font-size: 3.5em;
+        font-size: 3em;
         font-weight: bold;
         margin-bottom: .5em !important;
     }
@@ -59,14 +61,14 @@ const Container = styled.div`
 const ChatButton = styled.button`
     font-weight: 700;
     color: #fff;
-    background: #50B4BF;
+    background: #119FDC;
     border: none;
     border-radius: 20px;
     padding: .5em 1.65em;
     margin: .3em;
     cursor: pointer;
     &:hover {
-        background-color: #299ca8;
+        background-color: #0e93cc;
     }
 `
 
