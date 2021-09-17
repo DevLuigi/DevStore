@@ -34,8 +34,12 @@ export default function Index() {
 
 
     async function listar(){
+        loading.current.continuousStart();
+
         let r = await api.listar();
         setProdutos(r);
+
+        loading.current.complete();
     }
 
     async function inserir(){
@@ -127,7 +131,7 @@ export default function Index() {
             <ToastContainer />
             <Menu />
             <Conteudo>
-                <Cabecalho />
+                <Cabecalho refresh={listar}/>
                 <div class="body-right-box">
                     <div class="new-student-box">
                         

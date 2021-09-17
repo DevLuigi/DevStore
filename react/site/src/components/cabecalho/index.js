@@ -4,7 +4,7 @@ import { Container } from './styled'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Index() {
+export default function Index(props) {
 
     async function emBreve(){
         toast.warning("Em breve...")
@@ -23,7 +23,7 @@ export default function Index() {
                 </div>
                 
                 <div class="box-image">
-                    <div class="refresh-button"> <button onClick={emBreve}> <img src="/assets/images/refresh.svg" alt = "" />  </button> </div>
+                    <div class="refresh-button"> <button onClick={props.refresh}> <img src="/assets/images/refresh.svg" alt = "" />  </button> </div>
                     <div class="left-button"> <button onClick={emBreve}> <img src="/assets/images/log-out.svg" alt = "" />  </button> </div>
                 </div>
             </div>

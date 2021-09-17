@@ -31,6 +31,9 @@ app.post('/produto', async (req, resp) =>{
             return resp.send({ erro: "Não é possivel usar textos em campos de números !!"})    
         }
 
+        if(!isNaN(nome) || !isNaN(categoria) || !isNaN(imagem) || !isNaN(descricao))
+            return resp.send({ erro: "Não é possivel usar números em campos de texto !!" })
+
         let conferir = await db.tb_produto.findOne({ where: { nm_produto: nome }})
         if(conferir != null)
             return resp.send({ erro: "Esse produto ja existe !!" })
@@ -70,6 +73,9 @@ app.put('/produto/:id', async (req, resp) =>{
         if(isNaN(precoDE) || isNaN(precoPOR) || isNaN(avaliacao)|| isNaN(estoque)){
             return resp.send({ erro: "Não é possivel usar textos em campos de números !!"})    
         }
+
+        if(!isNaN(nome) || !isNaN(categoria) || !isNaN(imagem) || !isNaN(descricao))
+            return resp.send({ erro: "Não é possivel usar números em campos de texto !!" })
 
         let r = await db.tb_produto.update({
             nm_produto: nome,
