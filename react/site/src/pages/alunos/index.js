@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingBar from 'react-top-loading-bar'
+import { useHistory } from 'react-router-dom';
+
 
 import Api from '../../services/api.js'
 const api = new Api();
@@ -31,6 +33,12 @@ export default function Index() {
     const [ idAlterando, setIdAlterando ] = useState(0);
     
     const loading = useRef(null);
+
+    const navigation = useHistory();
+
+    const error = () => {
+        navigation.push('/*');
+    }
 
 
     async function listar(){
@@ -131,7 +139,7 @@ export default function Index() {
             <ToastContainer />
             <Menu />
             <Conteudo>
-                <Cabecalho refresh={listar}/>
+                <Cabecalho refresh={listar} NotFound={error}/>
                 <div class="body-right-box">
                     <div class="new-student-box">
                         

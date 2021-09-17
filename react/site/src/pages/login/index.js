@@ -2,14 +2,23 @@ import { React, useRef, useState } from 'react'
 
 import { Container, ChatButton, ChatInput } from './styled.js';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Login(){
 
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
 
+    const loading = useRef(null);
+
+    const rota = () => {
+        toast.warning("Use '/produtos' para acessar a tela de produtos")
+    }
 
     return(
         <Container>
+            <ToastContainer color="#10EAEA" ref={loading} />
             <div className="box">
                 <div className="titulo">
                     <img src="/assets/images/logo-monkchat.png" alt="" />
@@ -44,7 +53,7 @@ export default function Login(){
                         </div>
                         <div>
                             <ChatButton
-                                onClick={""}
+                                onClick={rota}
                                 style={{ fontSize: '1.2em'}}> Login </ChatButton>
                         </div>
                     </div>
