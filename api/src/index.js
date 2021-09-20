@@ -7,6 +7,37 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+app.get('/usuario', async (req, resp) => {
+    try{
+        let r = await db.tb_usuario.findAll({ order: [['id_usuario', 'desc']] });
+        resp.send(r);
+    } catch (e){
+        resp.send({ erro: `${e.toString()}` })
+    }
+})
+
+app.post('/login', async (req, resp) =>{
+    try{
+        let { login, senha } = req.body;
+
+        let r = await db.tb_usuario.findOne(
+            {
+                where: {
+                    ds_login: login,
+                    ds_senha: senha
+                }
+            })
+
+        if( r == null)
+            return resp.send({ erro: "Credenciais Invalidas !!" })
+        
+        
+    } catch (e){
+        resp.send({ erro: `${e.toString()}` })
+    }
+})
+
 app.get('/produto', async (req, resp) =>{
     try{
         let r = await db.tb_produto.findAll({ order: [['id_produto', 'desc']] });

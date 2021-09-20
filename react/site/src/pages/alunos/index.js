@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
 
@@ -12,6 +13,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingBar from 'react-top-loading-bar'
+
+import Cookies from 'js-cookie'
 
 import Api from '../../services/api.js'
 const api = new Api();
@@ -31,7 +34,11 @@ export default function Index() {
     const [ idAlterando, setIdAlterando ] = useState(0);
     
     const loading = useRef(null);
+    const navigation = useHistory();
 
+    let usuarioLogado = Cookies.get('usuario-logado')
+    if(usuarioLogado == null)
+        navigation.push('/');  
 
     async function listar(){
         let r = await api.listar();
