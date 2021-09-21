@@ -4,10 +4,11 @@ import { Container } from './styled'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
+
 import Cookies from 'js-cookie'
 
-export default function Index() {
+export default function Index(props) {
 
     const navigation = useHistory();
 

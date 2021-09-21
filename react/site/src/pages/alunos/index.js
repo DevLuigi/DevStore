@@ -13,8 +13,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingBar from 'react-top-loading-bar'
-import { useHistory } from 'react-router-dom';
-
 
 import Cookies from 'js-cookie'
 
@@ -44,12 +42,10 @@ export default function Index() {
         navigation.push('/');  
 
     async function listar(){
-        loading.current.continuousStart();
-
+        loading.current.continuousStart()        
         let r = await api.listar();
         setProdutos(r);
-
-        loading.current.complete();
+        loading.current.complete()
     }
 
     async function inserir(){
