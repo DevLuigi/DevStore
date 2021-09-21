@@ -24,17 +24,21 @@ export default function Login(){
 
     const logar = async () => {
         loading.current.continuousStart();
-        let r = await api.login(login, senha);
-
-        if(r.erro){
+        
+        let resp = await api.login(login, senha);
+        if(resp.erro){
             toast.error("Login ou Senha Invalidos !!")
             limpar();
             loading.current.complete();
         } else{
-            let r = Cookies.set('usuario-logado', true)
-            console.log(r)
+            Cookies.set('usuario-logado', true, { expires: 7 })
             navigation.push('/produtos')
         }    
+    }
+
+    const logoOff = async () => {
+        Cookies.remove('usuario-logado')
+        navigation.push('/')
     }
 
     function limpar() {

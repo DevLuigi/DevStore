@@ -34,6 +34,7 @@ export default function Index() {
     const [ idAlterando, setIdAlterando ] = useState(0);
     
     const loading = useRef(null);
+    
     const navigation = useHistory();
 
     let usuarioLogado = Cookies.get('usuario-logado')
@@ -41,8 +42,11 @@ export default function Index() {
         navigation.push('/');  
 
     async function listar(){
+
         let r = await api.listar();
+        loading.current.continuousStart();
         setProdutos(r);
+        loading.current.complete();
     }
 
     async function inserir(){
@@ -125,7 +129,7 @@ export default function Index() {
     }
 
     useEffect(() =>{
-        listar();
+        listar()
     }, [])
 
     return (
