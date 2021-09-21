@@ -1,27 +1,54 @@
 import { React, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { Container, ChatButton, ChatInput } from './styled.js';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import LoadingBar from 'react-top-loading-bar'
+
+import Cookies from 'js-cookie'
+
+import Api from '../../services/api.js'
+const api = new Api();
+
+
 export default function Login(){
 
-    const [usuario, setUsuario] = useState('');
+    const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
 
     const loading = useRef(null);
+    const navigation = useHistory();
 
-    const rota = () => {
-        toast.warning("Use '/produtos' para acessar a tela de produtos")
+    const logar = async () => {
+        loading.current.continuousStart();
+        
+        let resp = await api.login(login, senha);
+        if(resp.erro){
+            toast.error("Login ou Senha Invalidos !!")
+            limpar();
+            loading.current.complete();
+        } else{
+            Cookies.set('usuario-logado', true, { expires: 7 })
+            navigation.push('/produtos')
+        }    
     }
+
+    function limpar() {
+        setLogin('');
+        setSenha('');
+    }
+
 
     return(
         <Container>
-            <ToastContainer color="#10EAEA" ref={loading} />
+            <LoadingBar color="#10EAEA" ref={loading}/>
+            <ToastContainer />
             <div className="box">
                 <div className="titulo">
-                    <img src="/assets/images/logo-monkchat.png" alt="" />
+                    <img  style={{ width: "3em", height: "3em" }} src="/assets/images/logo.svg" alt="" />
                     <br />
                     DevStore
                 </div>
@@ -37,8 +64,8 @@ export default function Login(){
                         <div>
                             <div className="label">Login </div>
                             <ChatInput
-                                value={usuario}
-                                onChange={e => setUsuario(e.target.value)}
+                                value={login}
+                                onChange={e => setLogin(e.target.value)}
                                 style={{ border: '1px solid gray', fontSize: '1.5em', cursor: "text" }}
                                 />
                         </div>
@@ -53,7 +80,7 @@ export default function Login(){
                         </div>
                         <div>
                             <ChatButton
-                                onClick={rota}
+                                onClick={logar}
                                 style={{ fontSize: '1.2em'}}> Login </ChatButton>
                         </div>
                     </div>

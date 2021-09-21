@@ -13,7 +13,7 @@ const Container = styled.div`
         text-align: center;
         width: 60vw;
         padding: 2em 5em 6em 5em;
-        background-color: #119FDC;
+        background-color: #282828;
         color: #fff;
     }
     .titulo {
@@ -61,14 +61,14 @@ const Container = styled.div`
 const ChatButton = styled.button`
     font-weight: 700;
     color: #fff;
-    background: #119FDC;
+    background: #10EAEA;
     border: none;
     border-radius: 20px;
     padding: .5em 1.65em;
     margin: .3em;
     cursor: pointer;
     &:hover {
-        background-color: #0e93cc;
+        background-color: #0fd4d4;
     }
 `
 

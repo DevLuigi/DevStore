@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
 
@@ -14,6 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingBar from 'react-top-loading-bar'
 import { useHistory } from 'react-router-dom';
 
+
+import Cookies from 'js-cookie'
 
 import Api from '../../services/api.js'
 const api = new Api();
@@ -33,13 +36,12 @@ export default function Index() {
     const [ idAlterando, setIdAlterando ] = useState(0);
     
     const loading = useRef(null);
-
+    
     const navigation = useHistory();
 
-    const error = () => {
-        navigation.push('/*');
-    }
-
+    let usuarioLogado = Cookies.get('usuario-logado')
+    if(usuarioLogado == null)
+        navigation.push('/');  
 
     async function listar(){
         loading.current.continuousStart();
@@ -130,7 +132,7 @@ export default function Index() {
     }
 
     useEffect(() =>{
-        listar();
+        listar()
     }, [])
 
     return (
@@ -139,7 +141,7 @@ export default function Index() {
             <ToastContainer />
             <Menu />
             <Conteudo>
-                <Cabecalho refresh={listar} NotFound={error}/>
+                <Cabecalho refresh={listar} />
                 <div class="body-right-box">
                     <div class="new-student-box">
                         

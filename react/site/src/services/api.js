@@ -26,4 +26,9 @@ export default class Api {
         let r = await api.delete(`/produto/${id}`);
         return r.data;
     }
+
+    async login(login, senha){
+        let r = await api.post('/login', { login, senha })
+        return r.data;
+    }
 }

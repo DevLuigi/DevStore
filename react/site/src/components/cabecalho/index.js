@@ -4,10 +4,16 @@ import { Container } from './styled'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Index(props) {
+import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
-    async function emBreve(){
-        toast.warning("Em breve...")
+export default function Index() {
+
+    const navigation = useHistory();
+
+    const logoOff = async () => {
+        Cookies.remove('usuario-logado')
+        navigation.push('/')
     }
 
     return (
@@ -24,7 +30,7 @@ export default function Index(props) {
                 
                 <div class="box-image">
                     <div class="refresh-button"> <button onClick={props.refresh}> <img src="/assets/images/refresh.svg" alt = "" />  </button> </div>
-                    <div class="left-button"> <button onClick={props.NotFound}> <img src="/assets/images/log-out.svg" alt = "" />  </button> </div>
+                    <div class="left-button"> <button onClick={logoOff}> <img src="/assets/images/log-out.svg" alt = "" />  </button> </div>
                 </div>
             </div>
             <div class="bottom-bar-right-header" />
