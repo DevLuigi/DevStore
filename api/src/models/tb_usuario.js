@@ -21,6 +21,10 @@ export default class tb_usuario extends Model {
     ds_senha: {
       type: DataTypes.STRING(400),
       allowNull: true
+    },
+    img_usuario: {
+      type: DataTypes.STRING(400),
+      allowNull: true
     }
   }, {
     sequelize,
