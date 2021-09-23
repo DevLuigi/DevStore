@@ -31,4 +31,9 @@ export default class Api {
         let r = await api.post('/login', { login, senha })
         return r.data;
     }
+
+    async criarConta(nome, login, senha, img){
+        let r = await api.post('/usuario', { nome, login, senha, img })
+        return r.data;
+    }
 }

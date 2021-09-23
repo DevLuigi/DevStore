@@ -1,7 +1,7 @@
 
 import { Container } from './styled'
 
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useHistory } from 'react-router-dom'
