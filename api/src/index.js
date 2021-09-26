@@ -1,7 +1,7 @@
 import db from './db.js';
-import express from 'express'
+import express, { raw } from 'express'
 import cors from 'cors'
-
+import crypto from 'crypto-js'
 
 const app = express();
 app.use(cors());
@@ -12,10 +12,22 @@ app.post('/usuario', async (req, resp) => {
     try{
         let { nome, login, senha, img } = req.body;
 
+        let existe = await db.tb_usuario.findOne(
+            { 
+                where: 
+                    { 
+                        nm_usuario: nome,
+                        ds_login: login
+                    } 
+            })
+        
+        if(existe != null)
+            return resp.send({ erro: 'Algum usuario ja está usando essas informações !!' })
+
         let r = await db.tb_usuario.create({
             nm_usuario: nome,
             ds_login: login,
-            ds_senha: senha,
+            ds_senha: crypto.SHA256(senha).toString(crypto.enc.Base64),
             img_usuario: img
         })
 
@@ -38,18 +50,21 @@ app.get('/usuario', async (req, resp) => {
 app.post('/login', async (req, resp) =>{
     try{
         let { login, senha } = req.body;
+        let crypto = crypto.SHA256(senha).toString(crypto.enc.Base64);
 
         let r = await db.tb_usuario.findOne(
             {
                 where: {
                     ds_login: login,
-                    ds_senha: senha
-                }
+                    ds_senha: crypto
+                },
+                raw: true
             })
 
-        if( r == null)
+        if(r == null)
             return resp.send({ erro: "Credenciais Invalidas !!" })
 
+        delete r.ds_senha;
         resp.send(r);    
     } catch (e){
         resp.send({ erro: `${e.toString()}` })

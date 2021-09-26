@@ -42,10 +42,12 @@ export default function Index() {
         navigation.push('/');  
 
     async function listar(){
-        loading.current.continuousStart()        
+        if(usuarioLogado == null){
+            navigation.push('/');
+        }
+
         let r = await api.listar();
         setProdutos(r);
-        loading.current.complete()
     }
 
     async function inserir(){

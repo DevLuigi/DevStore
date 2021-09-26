@@ -25,15 +25,19 @@ export default function Login(){
     const logar = async () => {
         loading.current.continuousStart();
         
-        let resp = await api.login(login, senha);
-        if(resp.erro){
+        let r = await api.login(login, senha);
+        if(r.erro){
             toast.error("Login ou Senha Invalidos !!")
             limpar();
             loading.current.complete();
         } else{
-            Cookies.set('usuario-logado', true, { expires: 7 })
+            Cookies.set('usuario-logado', JSON.stringify(r), { expires: 7 })
             navigation.push('/produtos')
         }    
+    }
+
+    const criarConta = () => {
+        navigation.push('/cadastro')
     }
 
     function limpar() {
@@ -79,9 +83,8 @@ export default function Login(){
                                 />
                         </div>
                         <div>
-                            <ChatButton
-                                onClick={logar}
-                                style={{ fontSize: '1.2em'}}> Login </ChatButton>
+                            <ChatButton onClick={criarConta} style={{ fontSize: '1.2em'}}> Criar Conta </ChatButton>
+                            <ChatButton onClick={logar} style={{ fontSize: '1.2em'}}> Login </ChatButton>
                         </div>
                     </div>
                 </div>

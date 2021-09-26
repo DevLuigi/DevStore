@@ -24,18 +24,17 @@ export default function Login(){
     const loading = useRef(null);
     const navigation = useHistory();
 
-    const logar = async () => {
+    const criarUsuario = async () => {
         loading.current.continuousStart();
         
-        let resp = await api.criarConta(nome, login, senha, img);
-        if(resp.erro){
-            toast.error(resp.erro)
-            limpar();
-            loading.current.complete();
-        } else{
-            Cookies.set('usuario-logado', true, { expires: 7 })
+        let r = await api.criarConta(login, senha, nome, img);
+        if(r.erro){
+            toast.error(r.erro);
+            loading.current.complete(); 
+        } else {
+            Cookies.set('usuario-logado', JSON.stringify(r), { expires: 7 })
             navigation.push('/produtos')
-        }    
+        }
     }
 
     function limpar() {
@@ -64,7 +63,7 @@ export default function Login(){
 
                     <div className="form-row">
                         <div>
-                            <div className="label"> Name </div>
+                            <div className="label"> Nome </div>
                             <ChatInput
                                 value={nome}
                                 onChange={e => setNome(e.target.value)}
@@ -81,7 +80,7 @@ export default function Login(){
                                 />
                         </div>
                         <div>
-                            <div className="label"> Password </div>
+                            <div className="label"> Senha </div>
                             <ChatInput
                                 value={senha}
                                 onChange={e => setSenha(e.target.value)}
@@ -90,7 +89,7 @@ export default function Login(){
                                 />
                         </div>
                         <div>
-                            <div className="label">  Link Image </div>
+                            <div className="label">  Link Imagem </div>
                             <ChatInput
                                 value={img}
                                 onChange={e => setImg(e.target.value)}
@@ -100,8 +99,8 @@ export default function Login(){
                         </div>
                         <div>
                             <ChatButton
-                                onClick={logar}
-                                style={{ fontSize: '1.2em'}}> Login </ChatButton>
+                                onClick={criarUsuario}
+                                style={{ fontSize: '1.2em'}}> Criar </ChatButton>
                         </div>
                     </div>
                 </div>

@@ -51,6 +51,10 @@ const Container = styled.div`
         padding: 0.5em;
     }
 
+    .image{
+    
+    }
+
     .box-user {
         display: flex;
         flex-direction: row;
