@@ -6,6 +6,8 @@
 
 Este projeto objetiva o desenvolvimento de uma aplicação WEB para controle de Produtos online.
 
+🚧🚧 Este Projeto Está em Desenvolvimento... 🚧🚧
+
 ## STACK
 
 ### Frontend
