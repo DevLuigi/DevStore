@@ -141,7 +141,7 @@ export default function Index() {
             <Conteudo>
                 <Cabecalho refresh={listar} />
                 <div class="body-right-box">
-                    <div class="new-student-box">
+                    <div class="new-student-box" id="alterar">
                         
                         <div class="text-new-student">
                             <div class="bar-new-student"></div>
@@ -221,7 +221,7 @@ export default function Index() {
                                         <td title={x.ds_categoria}> {x.ds_categoria != null && x.ds_categoria.length >= 14 ? x.ds_categoria.substr(0, 14) + "..." : x.ds_categoria} </td>
                                         <td title={x.vl_preco_por}> {x.vl_preco_por != null && x.vl_preco_por} </td>
                                         <td> {x.qtd_estoque} </td>
-                                        <td class="coluna-acao"> <button onClick={() => alterar(x)}> <img src="/assets/images/edit.svg" alt="" /> </button> </td>
+                                        <td class="coluna-acao"> <button onClick={() => alterar(x)}> <a href="#alterar"> <img src="/assets/images/edit.svg" alt="" /> </a> </button> </td>
                                         <td class="coluna-acao"> <button onClick={() => remover(x.id_produto)}> <img src="/assets/images/trash.svg" alt="" /> </button> </td>
                                     </tr>
                                 )}

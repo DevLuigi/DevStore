@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.post('/usuario', async (req, resp) => {
     try{
-        let { nome, login, senha, img } = req.body;
+        let { img, nome, login, senha } = req.body;
 
         let existe = await db.tb_usuario.findOne(
             { 
@@ -42,6 +42,16 @@ app.get('/usuario', async (req, resp) => {
     try{
         let r = await db.tb_usuario.findAll({ order: [['id_usuario', 'desc']] });
         resp.send(r);
+    } catch (e){
+        resp.send({ erro: `${e.toString()}` })
+    }
+})
+
+app.delete('/usuario/:id', async (req, resp) => {
+    try{
+        let { id } = req.params
+        let r = await db.tb_usuario.destroy({ where: { id_usuario: id } })
+        resp.sendStatus(200)
     } catch (e){
         resp.send({ erro: `${e.toString()}` })
     }

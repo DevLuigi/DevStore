@@ -26,10 +26,9 @@ export default function Index(props) {
     let usuarioLogado = lerUsuarioLogado(navigation) || {};
 
 
-    const [img] = useState(usuarioLogado.img_usuario);
+    const [img]  = useState(usuarioLogado.img_usuario);
     const [nome] = useState(usuarioLogado.nm_usuario);
 
-    console.log(img, nome)
 
     const logoOff = async () => {
         Cookies.remove('usuario-logado')

@@ -26,8 +26,8 @@ export default function Login(){
 
     const criarUsuario = async () => {
         loading.current.continuousStart();
-        
         let r = await api.criarConta(login, senha, nome, img);
+
         if(r.erro){
             toast.error(r.erro);
             loading.current.complete(); 
@@ -35,11 +35,6 @@ export default function Login(){
             Cookies.set('usuario-logado', JSON.stringify(r), { expires: 7 })
             navigation.push('/produtos')
         }
-    }
-
-    function limpar() {
-        setLogin('');
-        setSenha('');
     }
 
 
