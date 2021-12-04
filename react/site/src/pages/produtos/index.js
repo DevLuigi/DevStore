@@ -130,8 +130,17 @@ export default function Index() {
     }
 
     useEffect(() =>{
+        async function listar(){
+            if(usuarioLogado == null){
+                navigation.push('/');
+            }
+    
+            let r = await api.listar();
+            setProdutos(r);
+        }
+
         listar()
-    }, [])
+    }, [navigation, usuarioLogado])
 
     return (
         <Container>
