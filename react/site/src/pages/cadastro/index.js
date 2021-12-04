@@ -21,17 +21,23 @@ export default function Login(){
     const [nome, setNome] = useState('');
     const [img, setImg] = useState('');
 
+
     const loading = useRef(null);
     const navigation = useHistory();
 
     const criarUsuario = async () => {
         loading.current.continuousStart();
-        let r = await api.criarConta(login, senha, nome, img);
+
+        console.log("imagem tela cadastro: " + img)
+        let r = await api.criarConta(login, nome, senha, img);
+
+        console.log(r)
 
         if(r.erro){
             toast.error(r.erro);
             loading.current.complete(); 
         } else {
+            loading.current.complete(); 
             Cookies.set('usuario-logado', JSON.stringify(r), { expires: 7 })
             navigation.push('/produtos')
         }

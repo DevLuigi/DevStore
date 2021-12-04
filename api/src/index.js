@@ -10,7 +10,8 @@ app.use(express.json());
 
 app.post('/usuario', async (req, resp) => {
     try{
-        let { img, nome, login, senha } = req.body;
+        let {login, nome, senha } = req.body;
+        let img = req.body.img;
 
         let existe = await db.tb_usuario.findOne(
             { 
@@ -60,13 +61,14 @@ app.delete('/usuario/:id', async (req, resp) => {
 app.post('/login', async (req, resp) =>{
     try{
         let { login, senha } = req.body;
-        let crypto = crypto.SHA256(senha).toString(crypto.enc.Base64);
+        
+        const cryptoSenha = crypto.SHA256(senha).toString(crypto.enc.Base64);
 
         let r = await db.tb_usuario.findOne(
             {
                 where: {
                     ds_login: login,
-                    ds_senha: crypto
+                    ds_senha: cryptoSenha
                 },
                 raw: true
             })
@@ -74,6 +76,7 @@ app.post('/login', async (req, resp) =>{
         if(r == null)
             return resp.send({ erro: "Credenciais Invalidas !!" })
 
+        
         delete r.ds_senha;
         resp.send(r);    
     } catch (e){

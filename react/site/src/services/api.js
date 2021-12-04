@@ -1,6 +1,8 @@
 import axios from 'axios'
 const api = axios.create({
-    baseURL: 'https://devstore-heroku.herokuapp.com'
+    baseURL: 'https://devstore-heroku.herokuapp.com/'
+    // lembre-se de mudar para localhost se for realizar 
+    // alguma mudança.
 })
 
 export default class Api {
@@ -32,8 +34,8 @@ export default class Api {
         return r.data;
     }
 
-    async criarConta(nome, login, senha, img){
-        let r = await api.post('/usuario', { nome, login, senha, img })
+    async criarConta(login, nome, senha, img){
+        let r = await api.post('/usuario', { login, nome, senha, img })
         return r.data;
     }
 }
